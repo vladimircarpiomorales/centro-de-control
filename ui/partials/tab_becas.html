@@ -1,0 +1,25 @@
+    <!-- Tab Becas & Cursos -->
+    <div class="tab-content" id="tab-becas">
+      <div class="becas-toolbar">
+        <button class="icon-btn update" onclick="refreshBecas(false)">⟳ Actualizar</button>
+        <button class="icon-btn web" onclick="refreshBecas(true)">🔎 Búsqueda profunda</button>
+        <button class="icon-btn" onclick="marcarVistos()">✓ Marcar vistos</button>
+        <span class="becas-update-info" id="becas-update-info"></span>
+      </div>
+      <div class="becas-toolbar">
+        <button class="beca-filtro active" onclick="filtrarBecas('todos', this)">Todos</button>
+        <button class="beca-filtro" onclick="filtrarBecas('sirve', this)">✅ Me sirven</button>
+        <button class="beca-filtro" onclick="filtrarBecas('nuevo', this)">✦ Nuevos</button>
+        <button class="beca-filtro" onclick="filtrarBecas('redes', this)">Redes</button>
+        <button class="beca-filtro" onclick="filtrarBecas('seguridad', this)">Seguridad</button>
+        <button class="beca-filtro" onclick="filtrarBecas('cloud', this)">Cloud</button>
+        <button class="beca-filtro" onclick="filtrarBecas('linux', this)">Linux</button>
+        <button class="beca-filtro" onclick="filtrarBecas('voucher', this)">Vouchers</button>
+        <button class="beca-filtro" onclick="filtrarBecas('beca', this)">Becas</button>
+        <button class="beca-filtro" onclick="filtrarBecas('reddit', this)">Reddit</button>
+        <button class="beca-filtro" onclick="filtrarBecas('telegram', this)">Telegram</button>
+        <button class="beca-filtro" id="becas-ver-basura" style="display:none;margin-left:auto" onclick="becasVerBasura = !becasVerBasura; renderBecas()"></button>
+      </div>
+      <div id="becas-list"><span style="font-size:11px;color:var(--muted2)">Cargando…</span></div>
+    </div>
+

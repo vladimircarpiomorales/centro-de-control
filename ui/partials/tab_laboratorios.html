@@ -1,0 +1,31 @@
+    <!-- Tab Laboratorios (VMware, KVM, CML, contenedores sueltos) -->
+    <div class="tab-content" id="tab-laboratorios">
+      <div class="becas-toolbar">
+        <button class="icon-btn update" onclick="loadLabs(true)">⟳ Actualizar</button>
+        <span class="becas-update-info" id="labs-ram"></span>
+      </div>
+
+      <section class="lab-seccion" id="labs-sueltos-sec" style="display:none">
+        <div class="lab-seccion-cab">
+          <span class="lab-seccion-titulo">🧹 Contenedores de laboratorio encendidos</span>
+          <button class="icon-btn ingles-no" onclick="pararSueltos()">■ Parar todos</button>
+        </div>
+        <div class="lab-sub">No son servicios del panel: suelen ser sesiones de práctica que se quedaron abiertas. Los marcados «se borra» desaparecen al pararlos (se lanzaron con --rm).</div>
+        <div id="labs-sueltos"></div>
+      </section>
+
+      <section class="lab-seccion">
+        <div class="lab-seccion-cab"><span class="lab-seccion-titulo">🔀 Cisco Modeling Labs</span></div>
+        <div id="labs-cml"></div>
+      </section>
+
+      <section class="lab-seccion">
+        <div class="lab-seccion-cab"><span class="lab-seccion-titulo">🐧 KVM / libvirt</span></div>
+        <div class="lab-grid" id="labs-kvm"></div>
+      </section>
+
+      <section class="lab-seccion">
+        <div class="lab-seccion-cab"><span class="lab-seccion-titulo">🖥 VMware Workstation</span></div>
+        <div class="lab-grid" id="labs-vmware"></div>
+      </section>
+    </div>

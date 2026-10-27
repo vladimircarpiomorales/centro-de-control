@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Enviar a MeTube",
+  "version": "1.1.0",
+  "description": "Detecta el video de la página y lo envía a MeTube (yt-dlp) del panel local.",
+  "permissions": ["webRequest", "storage", "activeTab", "cookies", "alarms"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Enviar a MeTube"
+  }
+}

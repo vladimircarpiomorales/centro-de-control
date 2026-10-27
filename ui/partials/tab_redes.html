@@ -1,0 +1,51 @@
+    <!-- Tab Redes (subnetting, calculadora, diagnóstico, vigilante) -->
+    <div class="tab-content" id="tab-redes">
+      <div class="becas-toolbar" id="redes-secciones">
+        <button class="beca-filtro active" onclick="redSeccion('subnet', this)">🧮 Subnetting</button>
+        <button class="beca-filtro" onclick="redSeccion('calc', this)">📐 Calculadora</button>
+        <button class="beca-filtro" onclick="redSeccion('diag', this)">🛰 Diagnóstico</button>
+        <button class="beca-filtro" onclick="redSeccion('red', this)">🏠 Tu red</button>
+      </div>
+
+      <section class="red-sec" id="red-subnet">
+        <div class="red-stats" id="subnet-stats"></div>
+        <div class="ingles-card red-reto" id="subnet-reto"></div>
+        <div class="ent-nota" style="text-align:center">Practica para el CCNA: cada respuesta cuenta para tu racha. Enter comprueba · N siguiente.</div>
+      </section>
+
+      <section class="red-sec" id="red-calc" style="display:none">
+        <div class="becas-toolbar">
+          <input class="carrera-input red-input" id="calc-cidr" placeholder="192.168.10.77/26 o 2001:db8::1/64" onkeydown="if(event.key==='Enter') calcularRed()">
+          <button class="icon-btn update" onclick="calcularRed()">Calcular</button>
+        </div>
+        <div id="calc-res"></div>
+      </section>
+
+      <section class="red-sec" id="red-diag" style="display:none">
+        <div class="becas-toolbar">
+          <input class="carrera-input red-input" id="diag-destino" placeholder="8.8.8.8 o google.com" value="1.1.1.1" onkeydown="if(event.key==='Enter') diagnosticar('ping')">
+          <button class="icon-btn update" onclick="diagnosticar('ping')">ping</button>
+          <button class="icon-btn" onclick="diagnosticar('mtr')">mtr</button>
+          <button class="icon-btn" onclick="diagnosticar('traceroute')">traceroute</button>
+          <button class="icon-btn" onclick="diagnosticar('dns')">DNS</button>
+        </div>
+        <pre class="red-salida" id="diag-salida">Elige un destino y una herramienta.</pre>
+        <div class="lab-seccion-cab" style="margin-top:14px"><span class="lab-seccion-titulo">🔌 Puertos en escucha en este equipo</span>
+          <button class="icon-btn" onclick="cargarPuertos()">⟳</button></div>
+        <div id="puertos"></div>
+      </section>
+
+      <section class="red-sec" id="red-red" style="display:none">
+        <div class="becas-toolbar">
+          <button class="icon-btn update" onclick="escanearRed(this)">⟳ Escanear ahora</button>
+          <button class="icon-btn" onclick="medirVelocidad(this)">🚀 Medir velocidad</button>
+          <span class="becas-update-info" id="red-info"></span>
+        </div>
+        <div class="red-graficas">
+          <div class="prep-bloque"><b>Latencia a internet (24 h)</b><div id="graf-latencia"></div></div>
+          <div class="prep-bloque"><b>Velocidad de bajada</b><div id="graf-velocidad"></div></div>
+        </div>
+        <div class="lab-seccion-cab" style="margin-top:12px"><span class="lab-seccion-titulo">📟 Dispositivos en tu red</span></div>
+        <div id="red-dispositivos"></div>
+      </section>
+    </div>

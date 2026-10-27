@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0; padding: 14px; width: 340px;
+      font: 13px/1.45 system-ui, sans-serif;
+      background: #16181d; color: #e6e6e6;
+    }
+    h1 { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #f5f5f5; }
+    #titulo {
+      font-size: 12px; color: #9aa0a6; margin-bottom: 12px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .fila { display: flex; gap: 8px; margin-bottom: 8px; }
+    button {
+      flex: 1; padding: 8px 10px; border: 0; border-radius: 6px;
+      background: #c2410c; color: #fff; font: inherit; font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover  { background: #ea580c; }
+    button.sec    { background: #2a2d34; color: #d0d0d0; }
+    button.sec:hover { background: #363a42; }
+    button:disabled { opacity: .5; cursor: default; }
+    #estado { min-height: 18px; font-size: 12px; margin: 4px 0 0; }
+    .ok    { color: #4ade80; }
+    .error { color: #f87171; }
+    details { margin-top: 12px; border-top: 1px solid #2a2d34; padding-top: 10px; }
+    summary { cursor: pointer; color: #9aa0a6; font-size: 12px; }
+    .stream {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 8px; font-size: 11px;
+    }
+    .stream code {
+      flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      color: #9aa0a6;
+    }
+    .stream button { flex: 0 0 auto; padding: 4px 8px; font-size: 11px; }
+    .tag {
+      flex: 0 0 auto; padding: 1px 5px; border-radius: 3px;
+      background: #2a2d34; color: #d0d0d0; font-size: 10px; text-transform: uppercase;
+    }
+    #vacio { color: #6b7280; font-size: 12px; margin-top: 8px; }
+    #cfg { display: flex; gap: 6px; align-items: center; margin-top: 10px; }
+    #cfg { flex-wrap: wrap; }
+    #cfg input {
+      flex: 1 1 100%; padding: 5px 7px; border: 1px solid #2a2d34; border-radius: 5px;
+      background: #0f1114; color: #d0d0d0; font: inherit; font-size: 11px;
+      margin-bottom: 5px;
+    }
+    #ck { margin-top: 12px; border-top: 1px solid #2a2d34; padding-top: 10px; }
+    #ck-info { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #9aa0a6; }
+    .punto {
+      flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%;
+      background: #4b5563;
+    }
+    .punto.si { background: #4ade80; }
+    .punto.no { background: #6b7280; }
+    .punto.viejo { background: #fbbf24; }
+    #aviso {
+      margin: 10px 0 0; padding: 9px 10px; border-radius: 6px;
+      background: #3f1d1d; border: 1px solid #7f1d1d; color: #fca5a5;
+      font-size: 12px; line-height: 1.4;
+    }
+    #lista-info {
+      display: flex; align-items: center; gap: 7px;
+      margin-top: 10px; font-size: 11px; color: #9aa0a6;
+    }
+    #li-txt { flex: 1; }
+    #li-act { flex: 0 0 auto; padding: 3px 8px; font-size: 11px; }
+    #ck-plazo, #pausa-lbl {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 9px; font-size: 11px; color: #9aa0a6; cursor: pointer;
+    }
+    #ck-plazo select {
+      padding: 2px 5px; border: 1px solid #2a2d34; border-radius: 4px;
+      background: #0f1114; color: #d0d0d0; font: inherit; font-size: 11px;
+    }
+    button.peligro { background: #b91c1c; color: #fff; }
+    button.peligro:hover { background: #dc2626; }
+    #sonda {
+      display: flex; align-items: center; gap: 8px;
+      margin: 0 0 12px; padding: 9px 10px; border-radius: 6px;
+      background: #1c1f26; border: 1px solid #2a2d34;
+      font-size: 12px; line-height: 1.35;
+    }
+    #sonda.ok    { background: #14261a; border-color: #166534; color: #86efac; }
+    #sonda.login { background: #2a2411; border-color: #a16207; color: #fcd34d; }
+    #sonda.no    { background: #2a1717; border-color: #7f1d1d; color: #fca5a5; }
+    #s-icono { flex: 0 0 auto; font-size: 14px; }
+    #s-txt   { flex: 1; }
+    #s-otra  { flex: 0 0 auto; padding: 2px 7px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Enviar a MeTube</h1>
+  <div id="titulo">…</div>
+
+  <div class="fila">
+    <button id="video">Video</button>
+    <button id="audio" class="sec">Solo audio</button>
+  </div>
+  <p id="estado"></p>
+
+  <div id="sonda">
+    <span id="s-icono">⏳</span>
+    <span id="s-txt">Comprobando el sitio…</span>
+    <button id="s-otra" class="sec" hidden>↻</button>
+  </div>
+
+  <div id="aviso" hidden></div>
+
+  <div id="ck">
+    <div id="ck-info">
+      <span id="ck-punto" class="punto"></span>
+      <span id="ck-txt">Cookies: —</span>
+    </div>
+    <div class="fila" style="margin:8px 0 0">
+      <button id="ck-subir" class="sec">Subir cookies del sitio</button>
+      <button id="ck-borrar" class="sec" style="flex:0 0 auto">Borrar</button>
+    </div>
+    <label id="ck-plazo">
+      Borrar solas en
+      <select id="plazo">
+        <option value="15">15 min</option>
+        <option value="30" selected>30 min</option>
+        <option value="120">2 h</option>
+        <option value="0">nunca</option>
+      </select>
+    </label>
+  </div>
+
+  <details id="det">
+    <summary>Streams detectados (<span id="n">0</span>)</summary>
+    <div id="lista"></div>
+    <p id="vacio">Nada detectado todavía. Dale play al video y vuelve a abrir esto.</p>
+    <label id="pausa-lbl">
+      <input type="checkbox" id="pausa">
+      Pausar la detección en todos los sitios
+    </label>
+    <div id="lista-info">
+      <span id="li-txt">Lista de sitios: —</span>
+      <button id="li-act" class="sec">Actualizar</button>
+    </div>
+    <div id="cfg">
+      <input id="base" placeholder="MeTube — http://127.0.0.1:8086">
+      <input id="panel" placeholder="Panel — http://127.0.0.1:7788">
+      <button id="guardar" class="sec" style="flex:0 0 auto">Guardar</button>
+    </div>
+  </details>
+
+  <script src="sensibles.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

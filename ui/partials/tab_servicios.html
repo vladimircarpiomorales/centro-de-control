@@ -1,0 +1,53 @@
+    <!-- Tabs de servicios (mosaico) -->
+    {% for tab_id in ['podman', 'locales', 'media', 'sistema'] %}
+    <div class="tab-content" id="tab-{{ tab_id }}">
+      <div class="becas-toolbar svc-toolbar">
+        <button class="beca-filtro svc-filtro" data-filtro="todos" onclick="filtrarServicios('todos')">Todos</button>
+        <button class="beca-filtro svc-filtro" data-filtro="on" onclick="filtrarServicios('on')">● Solo encendidos</button>
+      </div>
+      {% if tab_id == 'media' %}
+      <div class="metube-monitor" id="metube-monitor">
+        <div class="metube-monitor-title">MeTube · Actividad</div>
+        <div id="metube-queue-list"><span style="font-size:11px;color:var(--muted2)">Sin descargas activas</span></div>
+        <div style="font-size: 11px;letter-spacing:1.5px;color:var(--muted2);text-transform:uppercase;margin:8px 0 4px">Recientes</div>
+        <div id="metube-completed-list"></div>
+      </div>
+      {% endif %}
+      <div class="servicios-grid">
+        {% for sid, svc in services.items() if svc.tab == tab_id %}
+        <div class="service-card" id="card-{{ sid }}" data-id="{{ sid }}">
+          <div class="svc-top">
+            <div class="status-orb"></div>
+            <div class="service-name" title="{{ svc.label }}">{{ svc.label }}</div>
+            <div class="toggle-wrap" onclick="toggleService('{{ sid }}')" title="Encender / apagar">
+              <div class="toggle-thumb"></div>
+            </div>
+          </div>
+          <div class="service-meta" title="{{ svc.meta }}{% if svc.image %} · {{ svc.image }}{% endif %}">{{ svc.meta }}</div>
+          <div class="svc-bottom">
+            {% if svc.port %}<span class="port-tag">:{{ svc.port }}</span>{% endif %}
+            <span class="uptime-tag" id="uptime-{{ sid }}"></span>
+            <span style="flex:1"></span>
+            {% if svc.url %}
+            <button class="icon-btn web" onclick="apiCall('/api/open/{{ sid }}','POST')">↗ Abrir</button>
+            {% endif %}
+            <details class="svc-menu {% if not svc.has_update %}solo-restart{% endif %}">
+              <summary class="icon-btn" title="Más acciones">⋯</summary>
+              <div class="svc-menu-pop">
+                {% if svc.has_update %}
+                <button class="icon-btn update" onclick="cerrarMenus(); updateService('{{ sid }}')">⟳ Actualizar</button>
+                {% endif %}
+                <button class="icon-btn restart" onclick="cerrarMenus(); restartService('{{ sid }}')">↺ Reiniciar</button>
+                {% if svc.image %}<div class="svc-menu-info">{{ svc.image.split('/')[-1] }}</div>{% endif %}
+              </div>
+            </details>
+          </div>
+          <div class="progress-bar" id="progress-{{ sid }}">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="svc-vacio">Ninguno encendido en esta pestaña · <a href="#" onclick="filtrarServicios('todos'); return false">ver todos</a></div>
+    </div>
+    {% endfor %}

@@ -1,0 +1,12 @@
+  <!-- ══ LOG PANEL ═══════════════════════════════════════════════ -->
+  <div class="log-panel plegada" id="log-panel">
+    <div class="log-header" onclick="toggleLogPanel()" title="Pulsa para ver u ocultar la terminal">
+      <div class="log-live"></div>
+      <span class="log-title">Eventos</span>
+      <span class="log-ultimo" id="log-ultimo"></span>
+      <span class="log-avisos" id="log-avisos"></span>
+      <button class="log-clear" onclick="event.stopPropagation(); clearLogs()">Limpiar</button>
+      <span class="log-flecha" id="log-flecha">▲</span>
+    </div>
+    <div class="log-body" id="log-body"></div>
+  

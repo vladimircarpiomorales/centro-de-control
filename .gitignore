@@ -1,0 +1,64 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+panel.log
+panel_debug.log
+panel.log.*
+metube/
+build-ace/
+metube.log
+scrutiny-collector
+.claude/settings.local.json
+
+# Documentos personales: no son código y los PDF binarios se quedan en el
+# historial de git para siempre, aunque se borren del árbol después.
+cv/
+*.pdf
+
+# registro de candidaturas (datos personales)
+ofertas_data.json
+ofertas_data.json.tmp
+
+# progreso del repaso de inglés (personal)
+ingles_data.json
+ingles_data.json.tmp
+
+# simulador de entrevistas (personal)
+entrevistas_data.json
+entrevistas_data.json.tmp
+
+# lo personal vive fuera de git (ver perfil.example.json y carrera_semilla.example.json)
+perfil.json
+carrera_semilla.json
+carrera_data.json
+becas_data.json
+
+# vigilante de red (MACs de casa)
+redes_data.json
+redes_data.json.tmp
+
+# agenda personal
+agenda_data.json
+agenda_data.json.tmp
+
+# contactos (personas reales)
+contactos_data.json
+contactos_data.json.tmp
+
+# modo foco
+foco_data.json
+foco_data.json.tmp
+
+# retos de laboratorio hechos
+retos_data.json
+retos_data.json.tmp
+
+# tarjetas de estudio
+tarjetas_data.json
+tarjetas_data.json.tmp
+
+# mensajes del resumen semanal
+resumen_data.json
+resumen_data.json.tmp

@@ -1,0 +1,28 @@
+{
+  "nombre": "Alex",
+  "nombre_completo": "Alex Ejemplo",
+  "cv_maestro": "~/MiPanelControl/cv/cv.md",
+  "empresas": {
+    "Nube Norte S.L. (2024 – 2025, ya terminado)": {
+      "alias": ["nube norte"],
+      "temas": ["azure", "intune", "microsoft 365", "entra id", "backups"],
+      "cerrada": true
+    },
+    "Redes del Sur (2018 – 2024)": {
+      "alias": ["redes del sur"],
+      "temas": ["cisco", "vlan", "switching", "wifi", "firewall"],
+      "cerrada": false
+    },
+    "Proyectos personales (homelab)": {
+      "alias": ["homelab", "proyecto personal"],
+      "temas": ["podman", "proxmox", "vmware", "ollama"],
+      "cerrada": false
+    }
+  },
+  "en_preparacion": ["AZ-104", "CCNA"],
+  "reglas": ["Título profesional: «Técnico de Sistemas»."],
+  "coach_contexto": "Alex está cambiando de trabajo y quiere ver su progreso con datos.",
+  "cv_asistente": "técnico de sistemas buscando empleo",
+  "competencias": "Redes: switching y routing en una pyme, WiFi, VLAN. Linux: administración básica de Debian/Ubuntu (systemd, usuarios, SSH, bash). Cloud: Azure (preparando AZ-104). Idiomas: castellano nativo; inglés intermedio.",
+  "perfil_becas": "técnico de sistemas junior, estudia CCNA y AZ-104 (Azure); quiere trabajar en cloud/infraestructura. Busca formación gratuita. Habla castellano y lee inglés técnico."
+}

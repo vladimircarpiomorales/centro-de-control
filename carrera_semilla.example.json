@@ -1,0 +1,84 @@
+{
+ "perfil": "Técnico de sistemas con 5 años de experiencia en redes y Microsoft 365. Busca dar el salto a administración cloud.",
+ "meta": "Administrador cloud en 2 años",
+ "fases": [
+  {
+   "id": "f1",
+   "titulo": "Fase 1 — Consolidar",
+   "periodo": "Próximos 6 meses",
+   "objetivos": [
+    {
+     "id": "f1o1",
+     "icono": "💼",
+     "titulo": "Empleo",
+     "tareas": [
+      {
+       "id": "f1o1t1",
+       "texto": "Actualizar el CV técnico y LinkedIn",
+       "done": false,
+       "hito": false,
+       "done_date": null
+      },
+      {
+       "id": "f1o1t2",
+       "texto": "Postular a 10 ofertas por semana",
+       "done": false,
+       "hito": false,
+       "done_date": null
+      }
+     ]
+    },
+    {
+     "id": "f1o2",
+     "icono": "☁️",
+     "titulo": "Certificación cloud",
+     "tareas": [
+      {
+       "id": "f1o2t1",
+       "texto": "Terminar el temario del AZ-104",
+       "done": false,
+       "hito": false,
+       "done_date": null
+      },
+      {
+       "id": "f1o2t2",
+       "texto": "Aprobar el AZ-104",
+       "done": false,
+       "hito": true,
+       "done_date": null
+      }
+     ]
+    }
+   ],
+   "resumen": ""
+  },
+  {
+   "id": "f2",
+   "titulo": "Fase 2 — Especializar",
+   "periodo": "Año siguiente",
+   "objetivos": [
+    {
+     "id": "f2o1",
+     "icono": "🛠",
+     "titulo": "Automatización",
+     "tareas": [
+      {
+       "id": "f2o1t1",
+       "texto": "Aprender Terraform con un proyecto propio",
+       "done": false,
+       "hito": false,
+       "done_date": null
+      }
+     ]
+    }
+   ],
+   "resumen": ""
+  }
+ ],
+ "logros": [
+  {
+   "fecha": "2026-01-01",
+   "texto": "Monté un homelab con Podman y monitorización"
+  }
+ ]
+}

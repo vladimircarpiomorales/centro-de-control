@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manuales — Centro de Control PRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="/static/vendor/marked.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #080a0d;
+  --surface:     #0e1117;
+  --surface2:    #161b24;
+  --surface3:    #1e2433;
+  --border:      rgba(0,255,200,0.10);
+  --border-dim:  rgba(255,255,255,0.06);
+  --cyan:        #00ffc8;
+  --cyan-dim:    rgba(0,255,200,0.08);
+  --amber:       #ffb830;
+  --amber-dim:   rgba(255,184,48,0.10);
+  --blue:        #4d9fff;
+  --text:        #dde4f0;
+  --muted:       #4a5568;
+  --muted2:      #2d3748;
+  --font-mono:   'JetBrains Mono', monospace;
+  --font-display:'Syne', sans-serif;
+}
+
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-mono); }
+
+.app {
+  display: flex; flex-direction: column; height: 100vh;
+}
+
+.topbar {
+  display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  border-bottom: 1px solid var(--border-dim); background: var(--surface); flex-wrap: wrap;
+}
+.topbar .brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 800; margin-right: 8px; }
+.topbar .brand-icon { font-size: 18px; }
+.back-link {
+  font-size: 11px; color: var(--muted); text-decoration: none; border: 1px solid var(--border-dim);
+  border-radius: 6px; padding: 6px 10px; transition: all 0.15s;
+}
+.back-link:hover { color: var(--cyan); border-color: rgba(0,255,200,0.25); }
+
+.input, .btn {
+  font-family: var(--font-mono); font-size: 11px; border-radius: 6px; border: 1px solid var(--border-dim);
+}
+.input { background: var(--surface2); color: var(--text); padding: 8px 10px; }
+.input:focus { outline: none; border-color: rgba(0,255,200,0.3); }
+.btn { background: var(--surface2); color: var(--muted); padding: 8px 12px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.btn:hover { color: var(--text); border-color: var(--border); }
+
+.font-controls { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.font-controls button {
+  width: 26px; height: 26px; border-radius: 4px; border: 1px solid var(--border-dim);
+  background: var(--surface2); color: var(--muted); cursor: pointer; font-size: 12px;
+}
+.font-controls button:hover { color: var(--text); border-color: var(--border); }
+
+.searchbar { padding: 10px 16px; border-bottom: 1px solid var(--border-dim); background: var(--surface); }
+.searchbar .input { flex: 1; max-width: 480px; }
+
+.rag-panel { padding: 12px 16px; background: var(--surface2); border-bottom: 1px solid var(--border-dim); }
+.rag-answer {
+  background: var(--surface); border: 1px solid var(--border-dim); border-radius: 8px;
+  padding: 14px; font-size: 13px; line-height: 1.6; white-space: pre-wrap;
+}
+.rag-sources { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.rag-source {
+  font-size: 11px; color: var(--muted); background: var(--surface); border: 1px solid var(--border-dim);
+  border-radius: 6px; padding: 8px 10px;
+}
+.rag-source b { color: var(--cyan); }
+.rag-loading { color: var(--muted); font-size: 12px; }
+
+.conv-progress { padding: 6px 16px; display: none; background: var(--surface); border-bottom: 1px solid var(--border-dim); }
+.conv-progress-row { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+.conv-progress-track { height: 3px; background: var(--surface3); border-radius: 2px; overflow: hidden; }
+.conv-progress-fill { height: 100%; background: var(--blue); width: 0%; transition: width 1s ease; }
+
+.body { display: flex; flex: 1; min-height: 0; }
+
+.sidebar {
+  width: 320px; flex-shrink: 0; overflow-y: auto; border-right: 1px solid var(--border-dim);
+  padding: 10px; display: flex; flex-direction: column; gap: 4px; background: var(--surface);
+}
+.manual-item {
+  padding: 10px 12px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  color: var(--muted); border: 1px solid transparent; transition: all 0.15s;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.manual-item:hover { background: var(--surface2); color: var(--text); }
+.manual-item.active { background: var(--cyan-dim); border-color: rgba(0,255,200,0.25); color: var(--cyan); }
+.search-file {
+  font-size: 10px; letter-spacing: 0.5px; color: var(--cyan); text-transform: uppercase;
+  padding: 10px 12px 2px; opacity: 0.85;
+}
+.search-hit {
+  padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  color: var(--muted); border: 1px solid transparent; transition: all 0.15s; line-height: 1.4;
+}
+.search-hit:hover { background: var(--surface2); color: var(--text); }
+.search-hit mark { background: var(--amber-dim); color: var(--amber); border-radius: 3px; padding: 0 2px; }
+.empty { color: var(--muted2); font-size: 12px; padding: 20px; }
+
+.viewer {
+  flex: 1; overflow-y: auto; padding: 30px 48px; font-size: 15px; line-height: 1.7;
+  max-width: 100%; transition: background 0.15s, color 0.15s;
+}
+.viewer > div { max-width: 820px; margin: 0 auto; }
+.viewer h1, .viewer h2, .viewer h3 { font-family: var(--font-display); color: var(--text); margin: 22px 0 12px; }
+.viewer p { margin: 10px 0; color: var(--text); }
+.viewer img { max-width: 100%; border-radius: 6px; margin: 10px 0; }
+.viewer code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+.viewer pre { background: var(--surface2); padding: 14px; border-radius: 8px; overflow-x: auto; }
+.viewer table { border-collapse: collapse; margin: 12px 0; font-size: 0.85em; }
+.viewer th, .viewer td { border: 1px solid var(--border-dim); padding: 6px 12px; }
+.viewer th { background: var(--surface2); }
+.viewer mark.hl { background: var(--amber-dim); color: var(--amber); border-radius: 3px; padding: 0 2px; }
+
+.viewer.light { background: #f7f6f2; color: #22262e; }
+.viewer.light h1, .viewer.light h2, .viewer.light h3 { color: #14161b; }
+.viewer.light p { color: #22262e; }
+.viewer.light code, .viewer.light pre { background: #e9e7e0; color: #22262e; }
+.viewer.light th { background: #e9e7e0; }
+.viewer.light th, .viewer.light td { border-color: #d8d5cc; }
+.viewer.light mark.hl { background: #ffe58a; color: #5a4300; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><span class="brand-icon">📚</span> Manuales</div>
+    <a class="back-link" href="/">← Volver al panel</a>
+    <input class="input" id="manuales-dir" value="{{ manuales_dir }}" style="max-width:280px">
+    <button class="btn" onclick="cargarManuales()">⟳ Actualizar lista</button>
+    <div class="font-controls">
+      <button onclick="cambiarFuenteManual(-1)" title="Achicar letra">A-</button>
+      <button onclick="cambiarFuenteManual(1)" title="Agrandar letra">A+</button>
+      <button onclick="alternarTemaManual()" id="manuales-theme-btn" title="Modo claro/oscuro">🌙</button>
+    </div>
+  </div>
+
+  <div class="searchbar" style="display:flex;gap:8px;align-items:center">
+    <input class="input" id="manuales-buscar" placeholder="🔎 Buscar en todos los manuales..." oninput="onBuscarManuales()">
+    <button class="btn" onclick="alternarPanelIA()" id="rag-toggle-btn">🧠 Preguntar a la IA</button>
+    <button class="btn" onclick="indexarRag()" title="Genera/actualiza los embeddings de los manuales">⟳ Indexar para IA</button>
+  </div>
+
+  <div class="rag-panel" id="rag-panel" style="display:none">
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <input class="input" id="rag-pregunta" placeholder="Preguntale algo a los manuales indexados... (ej: ¿cómo configuro una VLAN?)" style="flex:1" onkeydown="if(event.key==='Enter') preguntarIA()">
+      <select class="input" id="rag-modelo" style="width:160px">
+        <option value="llama3.1">llama3.1</option>
+        <option value="qwen2.5:7b">qwen2.5</option>
+      </select>
+      <button class="btn" onclick="preguntarIA()" id="rag-ask-btn">Preguntar</button>
+    </div>
+    <div id="rag-resultado"></div>
+  </div>
+
+  <div class="conv-progress" id="manuales-conv-progress">
+    <div class="conv-progress-row">
+      <span>📄 Convirtiendo <b id="manuales-conv-file" style="color:var(--blue)"></b>…</span>
+      <span id="manuales-conv-pct">0%</span>
+    </div>
+    <div class="conv-progress-track"><div class="conv-progress-fill" id="manuales-conv-fill"></div></div>
+  </div>
+
+  <div class="body">
+    <div class="sidebar" id="manuales-list">
+      <div class="empty">Cargando…</div>
+    </div>
+    <div class="viewer" id="manuales-viewer">
+      <div><div class="empty">Selecciona un manual de la lista.</div></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+const DEFAULT_MANUALES_DIR = "{{ manuales_dir }}";
+const _memStore = {};
+const safeStorage = {
+  getItem(k) { try { return localStorage.getItem(k); } catch (e) { return _memStore[k] ?? null; } },
+  setItem(k, v) { try { localStorage.setItem(k, v); } catch (e) { _memStore[k] = v; } }
+};
+
+const socket = io();
+socket.on('pdf_progress', ({ file, percent }) => {
+  const box = document.getElementById('manuales-conv-progress');
+  box.style.display = 'block';
+  document.getElementById('manuales-conv-file').textContent = file;
+  document.getElementById('manuales-conv-pct').textContent = percent + '%';
+  document.getElementById('manuales-conv-fill').style.width = percent + '%';
+  if (percent >= 100) {
+    setTimeout(() => { box.style.display = 'none'; cargarManuales(); }, 1500);
+  }
+});
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function cargarManuales() {
+  const dir = document.getElementById('manuales-dir').value.trim() || DEFAULT_MANUALES_DIR;
+  safeStorage.setItem('manualesDir', dir);
+  const list = document.getElementById('manuales-list');
+  list.innerHTML = '<div class="empty">Cargando…</div>';
+  try {
+    const res = await fetch('/api/manuales?dir=' + encodeURIComponent(dir));
+    const data = await res.json();
+    const items = data.items || [];
+    if (!items.length) {
+      list.innerHTML = '<div class="empty">No hay .md en esta carpeta todavía.</div>';
+      return;
+    }
+    list.innerHTML = '';
+    items.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'manual-item';
+      el.textContent = '📄 ' + item.name;
+      el.title = item.name;
+      el.onclick = () => seleccionarManual(item.path, el);
+      list.appendChild(el);
+    });
+  } catch (e) {
+    list.innerHTML = '<div class="empty">Error al listar manuales.</div>';
+  }
+}
+
+let manualActualPath = null;
+async function seleccionarManual(path, el, query, occurrence = 0) {
+  document.querySelectorAll('.manual-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const viewer = document.getElementById('manuales-viewer');
+
+  if (manualActualPath === path) {
+    viewer.querySelectorAll('mark.hl').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
+    viewer.normalize();
+    if (query) resaltarYScroll(viewer, query, occurrence);
+    return;
+  }
+
+  manualActualPath = path;
+  viewer.innerHTML = '<div class="empty">Cargando…</div>';
+  try {
+    const res = await fetch('/api/manuales/raw?path=' + encodeURIComponent(path));
+    const data = await res.json();
+    if (data.error) {
+      viewer.innerHTML = '<div class="empty">' + escapeHtml(data.error) + '</div>';
+      manualActualPath = null;
+      return;
+    }
+    await renderPorPartes(viewer, data.content);
+    if (query) resaltarYScroll(viewer, query, occurrence);
+  } catch (e) {
+    viewer.innerHTML = '<div class="empty">Error al cargar el manual.</div>';
+    manualActualPath = null;
+  }
+}
+
+function marcarImagenesLazy(container) {
+  container.querySelectorAll('img').forEach(img => {
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  });
+}
+
+async function renderPorPartes(viewer, content) {
+  const partes = content.split(/(?=^#{1,2} )/m).filter(Boolean);
+  viewer.innerHTML = '';
+  const wrap = document.createElement('div');
+  viewer.appendChild(wrap);
+  if (partes.length <= 1) {
+    wrap.innerHTML = marked.parse(content);
+    marcarImagenesLazy(wrap);
+    return;
+  }
+  const BLOQUE = 20;
+  for (let i = 0; i < partes.length; i += BLOQUE) {
+    const div = document.createElement('div');
+    div.innerHTML = marked.parse(partes.slice(i, i + BLOQUE).join(''));
+    marcarImagenesLazy(div);
+    wrap.appendChild(div);
+    await new Promise(r => setTimeout(r, 0));
+  }
+}
+
+let manualesBuscarTimer = null;
+function onBuscarManuales() {
+  clearTimeout(manualesBuscarTimer);
+  const q = document.getElementById('manuales-buscar').value.trim();
+  if (!q) { cargarManuales(); return; }
+  manualesBuscarTimer = setTimeout(() => ejecutarBusquedaManuales(q), 300);
+}
+async function ejecutarBusquedaManuales(q) {
+  const dir = document.getElementById('manuales-dir').value.trim() || DEFAULT_MANUALES_DIR;
+  const list = document.getElementById('manuales-list');
+  list.innerHTML = '<div class="empty">Buscando…</div>';
+  try {
+    const res = await fetch('/api/manuales/buscar?dir=' + encodeURIComponent(dir) + '&q=' + encodeURIComponent(q));
+    const data = await res.json();
+    const resultados = data.resultados || [];
+    if (!resultados.length) {
+      list.innerHTML = '<div class="empty">Sin resultados para "' + escapeHtml(q) + '".</div>';
+      return;
+    }
+    list.innerHTML = '';
+    resultados.forEach(r => {
+      const header = document.createElement('div');
+      header.className = 'search-file';
+      header.textContent = '📄 ' + r.name;
+      list.appendChild(header);
+      r.coincidencias.forEach((c, idx) => {
+        const el = document.createElement('div');
+        el.className = 'search-hit';
+        el.innerHTML = resaltarTexto(c.texto, q);
+        el.onclick = () => seleccionarManual(r.path, null, q, idx);
+        list.appendChild(el);
+      });
+    });
+  } catch (e) {
+    list.innerHTML = '<div class="empty">Error al buscar.</div>';
+  }
+}
+function resaltarTexto(texto, q) {
+  const escaped = escapeHtml(texto);
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'ig');
+  return escaped.replace(re, m => '<mark>' + m + '</mark>');
+}
+function resaltarYScroll(container, query, occurrence = 0) {
+  const q = query.toLowerCase();
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  let node, count = 0;
+  while ((node = walker.nextNode())) {
+    const idx = node.nodeValue.toLowerCase().indexOf(q);
+    if (idx !== -1) {
+      if (count < occurrence) { count++; continue; }
+      const range = document.createRange();
+      range.setStart(node, idx);
+      range.setEnd(node, idx + query.length);
+      const mark = document.createElement('mark');
+      mark.className = 'hl';
+      range.surroundContents(mark);
+      mark.scrollIntoView({ block: 'center' });
+      return;
+    }
+  }
+}
+
+let manualesFontSize = parseInt(safeStorage.getItem('manualesFontSize') || '15', 10);
+function aplicarFuenteManual() {
+  document.getElementById('manuales-viewer').style.fontSize = manualesFontSize + 'px';
+}
+function cambiarFuenteManual(delta) {
+  manualesFontSize = Math.min(28, Math.max(11, manualesFontSize + delta));
+  safeStorage.setItem('manualesFontSize', String(manualesFontSize));
+  aplicarFuenteManual();
+}
+let manualesTemaClaro = safeStorage.getItem('manualesTemaClaro') === '1';
+function aplicarTemaManual() {
+  const viewer = document.getElementById('manuales-viewer');
+  const btn = document.getElementById('manuales-theme-btn');
+  viewer.classList.toggle('light', manualesTemaClaro);
+  btn.textContent = manualesTemaClaro ? '☀️' : '🌙';
+}
+function alternarTemaManual() {
+  manualesTemaClaro = !manualesTemaClaro;
+  safeStorage.setItem('manualesTemaClaro', manualesTemaClaro ? '1' : '0');
+  aplicarTemaManual();
+}
+
+(function () {
+  const saved = safeStorage.getItem('manualesDir');
+  // Si lo guardado es el default viejo ("~/Manuales-MD", de antes de mover todo al vault
+  // de Obsidian), lo ignoramos y dejamos el nuevo default del servidor — si no, el usuario
+  // se queda mirando una carpeta que ya no tiene los archivos.
+  if (saved && saved !== '~/Manuales-MD') document.getElementById('manuales-dir').value = saved;
+})();
+aplicarFuenteManual();
+aplicarTemaManual();
+cargarManuales();
+
+// ── RAG: preguntar a la IA sobre los manuales indexados ─────────────
+function alternarPanelIA() {
+  const panel = document.getElementById('rag-panel');
+  const visible = panel.style.display !== 'none';
+  panel.style.display = visible ? 'none' : 'block';
+  if (!visible) document.getElementById('rag-pregunta').focus();
+}
+async function indexarRag() {
+  const dir = document.getElementById('manuales-dir').value.trim() || DEFAULT_MANUALES_DIR;
+  await fetch('/api/manuales/rag/index', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ dir })
+  });
+  document.getElementById('rag-panel').style.display = 'block';
+  document.getElementById('rag-resultado').innerHTML =
+    '<div class="rag-loading">🧠 Indexando en el fondo (podés seguir usando la página)... revisa el panel principal para ver el progreso en el terminal de eventos.</div>';
+}
+async function preguntarIA() {
+  const pregunta = document.getElementById('rag-pregunta').value.trim();
+  if (!pregunta) return;
+  const dir = document.getElementById('manuales-dir').value.trim() || DEFAULT_MANUALES_DIR;
+  const modelo = document.getElementById('rag-modelo').value;
+  const out = document.getElementById('rag-resultado');
+  const btn = document.getElementById('rag-ask-btn');
+  btn.disabled = true;
+  out.innerHTML = '<div class="rag-loading">🧠 Pensando (puede tardar según el modelo)...</div>';
+  try {
+    const res = await fetch('/api/manuales/rag/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pregunta, dir, modelo })
+    });
+    const data = await res.json();
+    if (data.error) {
+      out.innerHTML = '<div class="rag-loading">❌ ' + escapeHtml(data.error) + '</div>';
+      return;
+    }
+    let html = '<div class="rag-answer">' + escapeHtml(data.respuesta) + '</div>';
+    if (data.fuentes && data.fuentes.length) {
+      html += '<div class="rag-sources">' + data.fuentes.map(f =>
+        `<div class="rag-source"><b>${escapeHtml(f.manual)}</b> — ${escapeHtml(f.snippet)}</div>`
+      ).join('') + '</div>';
+    }
+    out.innerHTML = html;
+  } catch (e) {
+    out.innerHTML = '<div class="rag-loading">❌ Error al preguntar.</div>';
+  } finally {
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

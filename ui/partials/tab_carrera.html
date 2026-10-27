@@ -1,0 +1,41 @@
+    <!-- Tab Mi Carrera -->
+    <div class="tab-content" id="tab-carrera">
+
+      <div class="carrera-hero">
+        <div>
+          <div class="carrera-meta-label">Mi objetivo</div>
+          <div class="carrera-meta-title" id="carrera-meta">…</div>
+          <div class="carrera-hero-stats" id="carrera-hero-stats">Cargando…</div>
+        </div>
+        <div class="carrera-hero-progress">
+          <div class="carrera-pct" id="carrera-pct-big">–%</div>
+          <div class="stat-bar"><div class="stat-fill" id="carrera-bar" style="width:0%"></div></div>
+          <div style="font-size: 11px;color:var(--muted2);margin-top:4px" id="carrera-pct-detalle"></div>
+        </div>
+      </div>
+
+      <div class="coach-box">
+        <div class="coach-head">
+          <span class="coach-title">🧠 Coach IA — ¿Cómo voy?</span>
+          <select class="carrera-input" id="coach-modelo" style="flex:0;min-width:110px">
+            <option value="llama3.1">llama3.1</option>
+          </select>
+          <button class="icon-btn web" id="coach-btn" onclick="pedirCoach()">🧠 Evaluar mi progreso</button>
+          <span class="coach-fecha" id="coach-fecha"></span>
+        </div>
+        <div class="coach-respuesta vacia" id="coach-respuesta">Pulsa «Evaluar mi progreso» y el modelo local leerá tu plan, tus avances y tus logros para decirte honestamente cómo vas y cuál es tu siguiente paso. (Necesita «Ollama (motor IA)» encendido.)</div>
+      </div>
+
+      <div class="logros-box">
+        <div class="logros-head">
+          <span class="logros-title">🏆 Mis logros</span>
+          <input class="carrera-input" id="logro-input" placeholder="Registra un logro de hoy — por pequeño que sea…"
+                 onkeydown="if(event.key==='Enter')addLogro()">
+          <button class="icon-btn update" onclick="addLogro()">＋ Añadir</button>
+        </div>
+        <div id="logros-list" style="max-height:220px;overflow-y:auto"></div>
+      </div>
+
+      <div id="carrera-fases"></div>
+    </div>
+

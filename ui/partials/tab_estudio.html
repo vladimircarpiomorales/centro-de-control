@@ -1,0 +1,21 @@
+    <!-- Tab Mi estudio (mapa de las plataformas de ~/Proyectos) -->
+    <div class="tab-content" id="tab-estudio">
+      <div class="becas-toolbar">
+        <button class="icon-btn update" onclick="loadPlataformas()">⟳ Actualizar</button>
+        <span class="becas-update-info">Tus plataformas de ~/Proyectos. El panel solo lee tu progreso; para estudiar, ▶ te lleva a cada una.</span>
+      </div>
+      <section class="tj-bloque">
+        <div class="lab-seccion-cab"><span class="lab-seccion-titulo">🃏 Tarjetas de estudio</span><span class="ent-nota" id="tj-stats"></span></div>
+        <div class="tj-layout">
+          <div class="tj-zona" id="tj-zona" tabindex="0">
+            <div class="tj-zona-txt">📸 <b>Pega (Ctrl+V) o arrastra aquí una captura</b> de NetAcad, MS Learn o tus apuntes<br>
+              <span class="ent-nota">o <a href="#" onclick="document.getElementById('tj-texto-box').style.display=''; return false">pega un texto</a> · <label class="tj-archivo">elige un archivo<input type="file" accept="image/png,image/jpeg,image/webp" onchange="tjArchivo(this.files[0])" hidden></label></span></div>
+            <div id="tj-texto-box" style="display:none"><textarea class="carrera-input" id="tj-texto" rows="4" placeholder="Pega aquí el texto…"></textarea>
+              <button class="icon-btn update" onclick="tjProponer('', '', document.getElementById('tj-texto').value)">Crear tarjetas</button></div>
+          </div>
+          <div class="tj-repaso" id="tj-repaso"></div>
+        </div>
+        <div id="tj-propuesta"></div>
+      </section>
+      <div class="plat-grid" id="plat-grid"><span class="hoy-vacio">Cargando…</span></div>
+    </div>

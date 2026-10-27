@@ -1,0 +1,28 @@
+  <!-- ══ TOPBAR ══════════════════════════════════════════════════ -->
+  <header class="topbar">
+    <div class="win-dots">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+    </div>
+    <div class="logo">Centro<span> de Control</span> PRO</div>
+    <div class="topbar-right">
+      <div class="sys-stat">CPU <span class="sys-stat-val" id="stat-cpu">–%</span></div>
+      <div class="sys-divider"></div>
+      <div class="sys-stat">RAM <span class="sys-stat-val" id="stat-ram">–%</span></div>
+      <div class="sys-divider"></div>
+      <div class="sys-stat">DISK <span class="sys-stat-val" id="stat-disk">–%</span></div>
+      <div class="sys-divider" id="divider-gpu" style="display:none"></div>
+      <div class="sys-stat" id="stat-gpu-wrap" style="display:none">GPU <span class="sys-stat-val" id="stat-gpu">–%</span></div>
+      <div class="sys-divider"></div>
+      <div class="live-pill"><div class="live-dot"></div> EN VIVO</div>
+      <div class="top-clock" id="clock">--:--:--</div>
+    </div>
+    <div class="foco-top" id="foco-top" onclick="abrirFoco()" title="Modo foco">⏱ Foco</div>
+    <div class="zoom-ctl" title="Tamaño de letra (Ctrl + / Ctrl − / Ctrl 0)">
+      <button onclick="cambiarZoom(-1)">A−</button>
+      <span class="zoom-val" id="zoom-val" onclick="cambiarZoom(0)" title="Volver al 100 %">100%</span>
+      <button onclick="cambiarZoom(1)">A+</button>
+    </div>
+  </header>
+

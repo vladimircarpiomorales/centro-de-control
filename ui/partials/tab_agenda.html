@@ -1,0 +1,26 @@
+    <!-- Tab Agenda -->
+    <div class="tab-content" id="tab-agenda">
+      <div class="ent-layout">
+        <aside class="ent-lado">
+          <div class="ent-bloque" id="agenda-form">
+            <div class="ent-bloque-titulo" id="agenda-form-titulo">🗓 Nuevo evento</div>
+            <input type="hidden" id="ag-id">
+            <label class="ent-label">Qué</label>
+            <input class="carrera-input" id="ag-titulo" placeholder="Entrevista en …, examen AZ-104, cita NIE…">
+            <label class="ent-label">Tipo</label>
+            <div class="ent-opciones" id="ag-tipos"></div>
+            <label class="ent-label">Cuándo</label>
+            <div class="ent-opciones"><input class="carrera-input" type="date" id="ag-fecha"><input class="carrera-input" type="time" id="ag-hora"></div>
+            <label class="ent-label">Dónde / enlace</label>
+            <input class="carrera-input" id="ag-lugar" placeholder="Dirección, Teams, Meet…">
+            <label class="ent-label">Notas</label>
+            <textarea class="carrera-input" id="ag-nota" rows="3" placeholder="Qué llevar, a quién preguntar…"></textarea>
+            <div class="ent-botones"><button class="icon-btn update" onclick="guardarEvento()">💾 Guardar</button>
+              <button class="icon-btn" onclick="limpiarEvento()">Limpiar</button></div>
+            <div class="ent-nota">Avisos: la víspera por la tarde, el mismo día por la mañana y una hora antes.</div>
+          </div>
+          <a class="icon-btn" href="/api/agenda.ics" download="agenda.ics" style="text-align:center;text-decoration:none">📲 Exportar al calendario del móvil (.ics)</a>
+        </aside>
+        <section class="ent-main" id="agenda-lista"></section>
+      </div>
+    </div>

@@ -1,0 +1,20 @@
+    <!-- Tab Inglés (vocabulario de las ofertas, repaso espaciado) -->
+    <div class="tab-content" id="tab-ingles">
+      <div class="ingles-cabecera">
+        <div>
+          <div class="ingles-etiqueta">Inglés para tu trabajo</div>
+          <div class="ingles-titulo">El inglés que te piden las ofertas</div>
+          <div class="ingles-stats" id="ingles-stats"></div>
+        </div>
+        <div class="ingles-acciones">
+          <button class="icon-btn update" onclick="extraerIngles()" title="Lee las ofertas que mejor encajan y saca sus expresiones en inglés (necesita «Ollama (motor IA)» encendido). El panel ya lo hace solo tras cada búsqueda de ofertas, cuando el equipo está libre">🧠 Sacar de mis ofertas</button>
+        </div>
+      </div>
+
+      <div class="ingles-repaso" id="ingles-repaso"></div>
+
+      <details class="ingles-lista">
+        <summary>📖 Todas las expresiones</summary>
+        <div id="ingles-todas"></div>
+      </details>
+    </div>

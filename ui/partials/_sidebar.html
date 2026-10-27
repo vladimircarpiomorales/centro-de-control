@@ -1,0 +1,160 @@
+  <!-- ══ SIDEBAR ═════════════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="nav-item active" onclick="switchTab('hoy', this)">
+        <span class="nav-icon">☀</span>
+        <span class="nav-text">Hoy</span>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Servicios</span>
+      <div class="nav-item" onclick="switchTab('podman', this)">
+        <span class="nav-icon">⬡</span>
+        <span class="nav-text">Podman</span>
+        <div class="tab-counts">
+          <span class="count-on" id="count-podman-on">0↑</span>
+          <span class="count-off" id="count-podman-off">0↓</span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('locales', this)">
+        <span class="nav-icon">◈</span>
+        <span class="nav-text">Locales</span>
+        <div class="tab-counts">
+          <span class="count-on" id="count-locales-on">0↑</span>
+          <span class="count-off" id="count-locales-off">0↓</span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('media', this)">
+        <span class="nav-icon">◎</span>
+        <span class="nav-text">Media & IA</span>
+        <div class="tab-counts">
+          <span class="count-on" id="count-media-on">0↑</span>
+          <span class="count-off" id="count-media-off">0↓</span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('sistema', this)">
+        <span class="nav-icon">◉</span>
+        <span class="nav-text">Sistema</span>
+        <div class="tab-counts">
+          <span class="count-on" id="count-sistema-on">0↑</span>
+          <span class="count-off" id="count-sistema-off">0↓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Prácticas</span>
+      <div class="nav-item" onclick="switchTab('redes', this); loadRedes()">
+        <span class="nav-icon">🌐</span>
+        <span class="nav-text">Redes</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('laboratorios', this)">
+        <span class="nav-icon">🧪</span>
+        <span class="nav-text">Laboratorios</span>
+        <div class="tab-counts">
+          <span class="count-on" id="count-labs-on" style="display:none"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Personal</span>
+      <div class="nav-item" onclick="switchTab('carrera', this)">
+        <span class="nav-icon">🚀</span>
+        <span class="nav-text">Mi Carrera</span>
+        <div class="tab-counts">
+          <span class="count-new" id="count-carrera-pct" style="display:none"></span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('ofertas', this)">
+        <span class="nav-icon">💼</span>
+        <span class="nav-text">Ofertas</span>
+        <div class="tab-counts">
+          <span class="count-new" id="count-ofertas-new" style="display:none"></span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('agenda', this); loadAgenda()">
+        <span class="nav-icon">🗓</span>
+        <span class="nav-text">Agenda</span>
+        <div class="tab-counts"><span class="count-new" id="count-agenda" style="display:none"></span></div>
+      </div>
+      <div class="nav-item" onclick="switchTab('contactos', this); loadContactos()">
+        <span class="nav-icon">🤝</span>
+        <span class="nav-text">Contactos</span>
+        <div class="tab-counts"><span class="count-new" id="count-contactos" style="display:none"></span></div>
+      </div>
+      <div class="nav-item" onclick="switchTab('entrevistas', this); loadEntrevistas()">
+        <span class="nav-icon">🎤</span>
+        <span class="nav-text">Entrevistas</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Formación</span>
+      <div class="nav-item" onclick="switchTab('estudio', this); loadPlataformas()">
+        <span class="nav-icon">🎓</span>
+        <span class="nav-text">Mi estudio</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('becas', this)">
+        <span class="nav-icon">🎁</span>
+        <span class="nav-text">Becas & Cursos</span>
+        <div class="tab-counts">
+          <span class="count-new" id="count-becas-new" style="display:none"></span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('ingles', this)">
+        <span class="nav-icon">🇬🇧</span>
+        <span class="nav-text">Inglés</span>
+        <div class="tab-counts">
+          <span class="count-new" id="count-ingles" style="display:none"></span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="location.href='/manuales'">
+        <span class="nav-icon">📚</span>
+        <span class="nav-text">Manuales</span>
+        <span style="margin-left:auto;font-size: 11px;color:var(--muted2)">↗</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Diagnóstico</span>
+      <div class="nav-item" onclick="switchTab('mantenimiento', this)">
+        <span class="nav-icon">🩺</span>
+        <span class="nav-text">Mantenimiento</span>
+        <div class="tab-counts">
+          <span class="count-off" id="count-mant" style="display:none"></span>
+        </div>
+      </div>
+      <div class="nav-item" onclick="switchTab('logs-view', this)">
+        <span class="nav-icon">≡</span>
+        <span class="nav-text">Logs</span>
+      </div>
+    </div>
+
+    <div class="sidebar-spacer"></div>
+
+    <details class="sidebar-actions sidebar-tools">
+      <summary class="sidebar-label" style="cursor:pointer;list-style:none">🧰 Herramientas ▾</summary>
+      <button class="action-btn btn-start" onclick="apiCall('/api/start-all','POST')">▶ Iniciar todos</button>
+      <button class="action-btn btn-stop"  onclick="apiCall('/api/stop-all','POST')">■ Apagar todos</button>
+      <button class="action-btn btn-scan"  onclick="scanAll()">⟳ Radar de estado</button>
+      <button class="action-btn btn-scan"  onclick="abrirModalOrg()" style="border-color:rgba(77,159,255,0.3);color:var(--blue)">📁 Configurar organización</button>
+      <button class="action-btn btn-scan"  onclick="organizarArchivos(true)" style="border-color:var(--border-dim);color:var(--muted);font-size: 11px">🔍 Vista previa</button>
+      <button class="action-btn btn-stop"  onclick="organizarArchivos(false)" style="border-color:rgba(0,230,118,0.3);color:var(--green);font-size: 11px">🚀 Organizar ahora</button>
+      <button class="action-btn btn-scan"  onclick="abrirModalEpub()" style="border-color:rgba(255,184,48,0.3);color:var(--amber)">🎵 Convertir EPUB</button>
+      <button class="action-btn btn-scan"  onclick="abrirModalPdf()" style="border-color:rgba(77,159,255,0.3);color:var(--blue)">📄 PDF/EPUB → Markdown</button>
+      <a class="action-btn btn-scan" href="/manuales" style="border-color:rgba(0,255,200,0.2);color:var(--cyan);text-decoration:none;text-align:center">📚 Ver manuales ↗</a>
+      <div class="manuales-conv-progress" id="manuales-conv-progress" style="display:none">
+        <div style="display:flex;justify-content:space-between;font-size: 11px;color:var(--muted)">
+          <span>Convirtiendo <b id="manuales-conv-file" style="color:var(--blue)"></b></span>
+          <span id="manuales-conv-pct">0%</span>
+        </div>
+        <div class="stat-bar"><div class="stat-fill" id="manuales-conv-fill" style="width:0%;background:var(--blue)"></div></div>
+      </div>
+    </details>
+    <div class="sidebar-actions">
+      <button class="action-btn btn-scan"  onclick="minimizarPanel()" style="border-color:rgba(0,255,200,0.2);color:var(--cyan)">— Minimizar a bandeja</button>
+      <button class="action-btn btn-stop"  onclick="salirSistema()" style="border-color:rgba(255,68,68,0.3);color:var(--red);margin-top:8px">⏻ Salir del sistema</button>
+    </div>
+  </aside>
+

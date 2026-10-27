@@ -1,0 +1,36 @@
+    <!-- Tab Entrevistas (simulador por voz) -->
+    <div class="tab-content" id="tab-entrevistas">
+      <div class="ent-layout">
+        <aside class="ent-lado">
+          <div class="ent-bloque">
+            <div class="ent-bloque-titulo">🎤 Nueva entrevista</div>
+            <label class="ent-label">Puesto</label>
+            <select class="carrera-input" id="ent-oferta"></select>
+            <label class="ent-label">Idioma</label>
+            <div class="ent-opciones">
+              <button class="beca-filtro active" data-idioma="es" onclick="entIdioma('es', this)">🇪🇸 Español</button>
+              <button class="beca-filtro" data-idioma="en" onclick="entIdioma('en', this)">🇬🇧 English</button>
+            </div>
+            <label class="ent-label">Preguntas</label>
+            <div class="ent-opciones">
+              <button class="beca-filtro" onclick="entPreguntas(4, this)">4 · rápida</button>
+              <button class="beca-filtro active" onclick="entPreguntas(6, this)">6</button>
+              <button class="beca-filtro" onclick="entPreguntas(8, this)">8 · completa</button>
+            </div>
+            <button class="icon-btn update ent-empezar" onclick="nuevaEntrevista()">▶ Empezar</button>
+            <div class="ent-nota">Claude hace de entrevistador. Respondes hablando: tu voz se pasa a texto con Whisper (Groq, vía OmniRoute) y la grabación queda en tu equipo para que te escuches.</div>
+          </div>
+          <div class="ent-bloque">
+            <div class="ent-bloque-titulo">📈 Tus entrevistas</div>
+            <div id="ent-historial"><span class="hoy-vacio">Todavía ninguna.</span></div>
+          </div>
+        </aside>
+        <section class="ent-main" id="ent-main">
+          <div class="ent-vacio">
+            <div class="ent-vacio-icono">🎤</div>
+            <div>Elige un puesto y pulsa <b>▶ Empezar</b>.</div>
+            <div class="ent-nota">Consejo: usa los cascos (el micro bueno es el de los cascos) y contesta como en una entrevista de verdad: situación → qué hiciste → resultado.</div>
+          </div>
+        </section>
+      </div>
+    </div>

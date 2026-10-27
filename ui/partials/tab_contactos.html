@@ -1,0 +1,21 @@
+    <!-- Tab Contactos -->
+    <div class="tab-content" id="tab-contactos">
+      <div class="ent-layout">
+        <aside class="ent-lado">
+          <div class="ent-bloque">
+            <div class="ent-bloque-titulo" id="ct-form-titulo">🤝 Nuevo contacto</div>
+            <input type="hidden" id="ct-id">
+            <label class="ent-label">Nombre</label><input class="carrera-input" id="ct-nombre">
+            <label class="ent-label">Empresa</label><input class="carrera-input" id="ct-empresa">
+            <label class="ent-label">Puesto</label><input class="carrera-input" id="ct-rol" placeholder="Recruiter IT, Jefe de sistemas…">
+            <label class="ent-label">Enlace (LinkedIn, email…)</label><input class="carrera-input" id="ct-enlace">
+            <label class="ent-label">Notas / de qué os conocéis</label><textarea class="carrera-input" id="ct-notas" rows="3"></textarea>
+            <label class="ent-label">Próximo paso</label>
+            <div class="ent-opciones"><input class="carrera-input" type="date" id="ct-proximo"><input class="carrera-input" id="ct-proximo-que" placeholder="qué toca"></div>
+            <div class="ent-botones"><button class="icon-btn update" onclick="guardarContacto()">💾 Guardar</button>
+              <button class="icon-btn" onclick="limpiarContacto()">Limpiar</button></div>
+          </div>
+        </aside>
+        <section class="ent-main" id="ct-lista"></section>
+      </div>
+    </div>

@@ -1,0 +1,59 @@
+    <!-- Tab Ofertas de empleo -->
+    <div class="tab-content" id="tab-ofertas">
+
+      <div class="carrera-hero">
+        <div>
+          <div class="carrera-meta-label">Búsqueda de empleo · Madrid</div>
+          <div class="carrera-meta-title">InfoJobs · Tecnoempleo · LinkedIn</div>
+          <div class="carrera-hero-stats" id="ofertas-hero-stats">Cargando…</div>
+        </div>
+        <div class="carrera-hero-progress">
+          <div class="carrera-pct" id="ofertas-semana">–</div>
+          <div class="stat-bar"><div class="stat-fill" id="ofertas-semana-bar" style="width:0%"></div></div>
+          <div style="font-size: 11px;color:var(--muted2);margin-top:4px">postulaciones esta semana</div>
+        </div>
+      </div>
+
+      <div class="becas-toolbar">
+        <button class="icon-btn update" id="ofertas-buscar-btn" onclick="refreshOfertas()">⟳ Buscar ofertas</button>
+        <button class="icon-btn web" onclick="evaluarOferta(null)" title="La IA local lee las 8 ofertas más prometedoras sin evaluar y las puntúa">🧠 Evaluar las mejores</button>
+        <select class="carrera-input" id="ofertas-modelo" style="flex:0;min-width:110px">
+          <option value="qwen2.5:7b">qwen2.5:7b</option>
+          <option value="llama3.1">llama3.1</option>
+        </select>
+        <button class="icon-btn" onclick="marcarOfertasVistas()">✓ Marcar vistas</button>
+        <button class="icon-btn" onclick="abrirSueldo()" title="De bruto a neto y comparador de ofertas">💶 Sueldo neto</button>
+        <span class="becas-update-info" id="ofertas-update-info"></span>
+      </div>
+      <div class="becas-toolbar" id="ofertas-filtros">
+        <button class="beca-filtro active" onclick="filtrarOfertas('todas', this)">Todas</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('nueva', this)">✦ Nuevas</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('encajan', this)">⭐ Encajan</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('guardada', this)">Guardadas</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('postulada', this)">Postuladas</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('seguimiento', this)">⏰ Seguimiento</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('entrevista', this)">Entrevistas</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('cerradas', this)">Cerradas</button>
+        <button class="beca-filtro" onclick="filtrarOfertas('descartada', this)">Descartadas</button>
+      </div>
+
+      <div class="logros-box" id="ofertas-brechas-box" style="display:none">
+        <div class="logros-head"><span class="logros-title">🎯 Lo que más te piden y aún no cubres</span></div>
+        <div id="ofertas-brechas"></div>
+      </div>
+
+      <details class="logros-box">
+        <summary class="logros-title" style="cursor:pointer">＋ Añadir una oferta que encontraste por tu cuenta</summary>
+        <div class="logros-head">
+          <input class="carrera-input" id="manual-titulo" placeholder="Puesto">
+          <input class="carrera-input" id="manual-empresa" placeholder="Empresa">
+          <input class="carrera-input" id="manual-url" placeholder="Enlace (opcional)">
+          <button class="icon-btn update" onclick="addOfertaManual()">＋ Guardar</button>
+        </div>
+      </details>
+
+      <div id="ofertas-list" style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:11px;color:var(--muted2)">Cargando…</span>
+      </div>
+    </div>
+

@@ -1,0 +1,76 @@
+    <!-- Tab Hoy (portada) -->
+    <div class="tab-content active" id="tab-hoy">
+      <div class="hoy-saludo">
+        <div class="hoy-titulo" id="hoy-titulo">Hoy</div>
+        <div class="hoy-fecha" id="hoy-fecha"></div>
+      </div>
+      <div class="hoy-alertas" id="hoy-alertas"></div>
+
+      <div class="hoy-agenda" id="hoy-agenda"></div>
+      <div class="hoy-grid">
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">🚀 Tu siguiente paso</span>
+            <a href="#" class="hoy-ver" onclick="irA('carrera'); return false">Mi Carrera →</a>
+          </div>
+          <div id="hoy-carrera"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">💼 Búsqueda de empleo</span>
+            <a href="#" class="hoy-ver" onclick="irA('ofertas'); return false">Ofertas →</a>
+          </div>
+          <div id="hoy-ofertas"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">📚 Tu estudio</span>
+            <a href="#" class="hoy-ver" onclick="irA('estudio'); loadPlataformas(); return false">Mi estudio →</a>
+          </div>
+          <div id="hoy-estudio"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">🧪 Reto de laboratorio</span>
+            <a href="#" class="hoy-ver" onclick="otroReto(); return false" title="Dame otro (cambia de área)">🎲 Otro</a>
+          </div>
+          <div id="hoy-reto"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">🇬🇧 Inglés de tus ofertas</span>
+            <a href="#" class="hoy-ver" onclick="irA('ingles'); return false">Inglés →</a>
+          </div>
+          <div id="hoy-ingles"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">📊 Tu semana</span>
+            <a href="#" class="hoy-ver" onclick="generarResumen(this); return false" title="Pedir ahora el mensaje del coach">✍ Resumen</a>
+          </div>
+          <div id="hoy-semana"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">🔌 Encendido ahora</span>
+            <a href="#" class="hoy-ver" onclick="irA('sistema'); return false">Servicios →</a>
+          </div>
+          <div id="hoy-servicios"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+
+        <section class="hoy-card">
+          <div class="hoy-card-head">
+            <span class="hoy-card-titulo">🎓 Formación nueva</span>
+            <a href="#" class="hoy-ver" onclick="irA('becas'); return false">Becas →</a>
+          </div>
+          <div id="hoy-becas"><span class="hoy-vacio">Cargando…</span></div>
+        </section>
+      </div>
+    </div>
+

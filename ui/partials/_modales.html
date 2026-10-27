@@ -1,0 +1,173 @@
+<div class="modal-overlay" id="lab-modal" onclick="if(event.target===this) this.classList.remove('show')">
+  <div class="modal-box prep-box">
+    <div class="modal-title" id="lab-modal-titulo">🧪 Lab</div>
+    <div class="prep-body lab-md" id="lab-modal-body"></div>
+    <div class="modal-actions"><button class="modal-btn modal-btn-secondary" onclick="document.getElementById('lab-modal').classList.remove('show')">Cerrar</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="foco-modal" onclick="if(event.target===this) cerrarFoco()">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-title">⏱ Modo foco</div>
+    <div id="foco-body" style="display:flex;flex-direction:column;gap:10px;margin:10px 0"></div>
+    <div class="modal-actions"><button class="modal-btn modal-btn-secondary" onclick="cerrarFoco()">Cerrar</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="sueldo-modal" onclick="if(event.target===this) cerrarSueldo()">
+  <div class="modal-box prep-box">
+    <div class="modal-title">💶 Sueldo neto y comparador de ofertas</div>
+    <div class="prep-body">
+      <div class="ent-nota">Estimación con IRPF y Seguridad Social de 2025 para Madrid, soltero/a sin hijos. Sirve para <b>comparar</b> ofertas; la nómina real puede variar un poco.</div>
+      <div class="sueldo-grid" id="sueldo-cols"></div>
+      <div id="sueldo-res"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="cerrarSueldo()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="prep-modal" onclick="if(event.target===this) cerrarPreparacion()">
+  <div class="modal-box prep-box">
+    <div class="modal-title" id="prep-modal-titulo">📝 Candidatura</div>
+    <div id="prep-modal-body" class="prep-body"></div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="cerrarPreparacion()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="cv-modal">
+  <div class="modal-box" style="max-width:540px">
+    <div class="modal-title">📄 Propuesta para el CV</div>
+    <div id="cv-modal-body" style="display:flex;flex-direction:column;gap:10px;margin:10px 0"></div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="cerrarCvModal()">Cerrar</button>
+      <button class="modal-btn modal-btn-primary" id="cv-aplicar-btn" onclick="aplicarCV()" style="display:none">✅ Aplicar al CV</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="org-modal">
+  <div class="modal-box">
+    <div class="modal-title">📁 Organizar archivos</div>
+
+    <div>
+      <div class="modal-label">Carpetas de origen (una por línea)</div>
+      <div style="display:flex;gap:6px">
+        <textarea class="modal-textarea" id="org-origenes" style="flex:1"></textarea>
+        <button class="modal-btn modal-btn-secondary" onclick="pickerOrigen()" style="writing-mode:vertical-lr;padding:8px 10px;font-size:16px">🗂️</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="modal-label">Carpeta de destino</div>
+      <div style="display:flex;gap:6px">
+        <input class="modal-input" id="org-destino" placeholder="~/Organizado" style="flex:1">
+        <button class="modal-btn modal-btn-secondary" onclick="pickerDestino()" style="padding:8px 10px;font-size:16px">🗂️</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="cerrarModal()">Cancelar</button>
+      <button class="modal-btn modal-btn-primary" onclick="guardarConfigOrg()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="epub-modal">
+  <div class="modal-box" style="max-width:560px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px">
+      <div style="width:48px;height:48px;border-radius:10px;background:var(--amber-dim);border:1px solid rgba(255,184,48,0.2);display:flex;align-items:center;justify-content:center;font-size:24px">🎵</div>
+      <div>
+        <div class="modal-title">Convertir EPUB a audiolibro</div>
+        <div style="font-size:11px;color:var(--muted)">Texto completo con voz natural via Kokoro TTS</div>
+      </div>
+    </div>
+
+    <div class="epub-dropzone" id="epub-dropzone" onclick="pickerEpub()" style="border:1px dashed var(--muted2);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s">
+      <div style="font-size:28px;margin-bottom:6px" id="epub-icon">📖</div>
+      <div style="font-size:12px;color:var(--muted)" id="epub-drop-text">Haz clic para seleccionar un archivo .epub</div>
+      <div style="font-size: 11.5px;color:var(--muted2);margin-top:4px" id="epub-file-info"></div>
+    </div>
+    <input type="hidden" id="epub-path">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <div class="modal-label">Voz</div>
+        <select class="modal-input" id="epub-voz" style="appearance:auto">
+          <option value="ef_dora">🇪🇸 ES — Dora</option>
+          <option value="em_alex">🇪🇸 ES — Alex</option>
+          <option value="af_sky">🇺🇸 EN — Sky</option>
+          <option value="af_bella">🇺🇸 EN — Bella</option>
+          <option value="af_nicole">🇺🇸 EN — Nicole</option>
+          <option value="am_adam">🇺🇸 EN — Adam</option>
+          <option value="am_michael">🇺🇸 EN — Michael</option>
+          <option value="bf_emma">🇬🇧 EN-UK — Emma</option>
+          <option value="bm_daniel">🇬🇧 EN-UK — Daniel</option>
+          <option value="ff_siwis">🇫🇷 FR — Siwis</option>
+          <option value="if_sara">🇮🇹 IT — Sara</option>
+          <option value="im_nicola">🇮🇹 IT — Nicola</option>
+          <option value="jf_alpha">🇯🇵 JP — Alpha</option>
+        </select>
+      </div>
+      <div>
+        <div class="modal-label">Velocidad</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:4px">
+          <input type="range" id="epub-speed" min="0.5" max="2.0" step="0.1" value="1.0" style="flex:1" oninput="document.getElementById('epub-speed-val').textContent=this.value+'x'">
+          <span id="epub-speed-val" style="color:var(--amber);min-width:40px;text-align:right;font-weight:700">1.0x</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="modal-label">Carpeta de salida</div>
+      <div style="display:flex;gap:6px">
+        <input class="modal-input" id="epub-output" value="~/Audiolibros" style="flex:1">
+        <button class="modal-btn modal-btn-secondary" onclick="pickerDestinoEpub()" style="padding:8px 10px;font-size:16px">🗂️</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="cerrarModalEpub()">Cancelar</button>
+      <button class="modal-btn modal-btn-primary" onclick="convertirEpub()" id="epub-convert-btn" style="border-color:var(--amber);color:var(--amber);background:rgba(255,184,48,0.06)">🎬 Convertir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pdf-modal">
+  <div class="modal-box" style="max-width:560px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px">
+      <div style="width:48px;height:48px;border-radius:10px;background:rgba(77,159,255,0.08);border:1px solid rgba(77,159,255,0.2);display:flex;align-items:center;justify-content:center;font-size:24px">📄</div>
+      <div>
+        <div class="modal-title">Convertir a Markdown</div>
+        <div style="font-size:11px;color:var(--muted)">PDF o EPUB — manuales técnicos (Aruba, HPE, Cisco...) via Docling</div>
+      </div>
+    </div>
+
+    <div id="pdf-dropzone" onclick="pickerPdf()" style="border:1px dashed var(--muted2);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s">
+      <div style="font-size:28px;margin-bottom:6px" id="pdf-icon">📄</div>
+      <div style="font-size:12px;color:var(--muted)" id="pdf-drop-text">Haz clic para seleccionar un archivo .pdf o .epub</div>
+      <div style="font-size: 11.5px;color:var(--muted2);margin-top:4px" id="pdf-file-info"></div>
+    </div>
+    <div style="text-align:center;margin-top:-6px">
+      <a href="#" onclick="pickerPdfFolder(); return false;" style="font-size:11px;color:var(--blue);text-decoration:none">o convertir todos los PDF/EPUB de una carpeta →</a>
+    </div>
+    <input type="hidden" id="pdf-path">
+
+    <div>
+      <div class="modal-label">Carpeta de salida (.md)</div>
+      <div style="display:flex;gap:6px">
+        <input class="modal-input" id="pdf-output" value="{{ manuales_dir }}" style="flex:1">
+        <button class="modal-btn modal-btn-secondary" onclick="pickerDestinoPdf()" style="padding:8px 10px;font-size:16px">🗂️</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="cerrarModalPdf()">Cancelar</button>
+      <button class="modal-btn modal-btn-primary" onclick="convertirPdf()" id="pdf-convert-btn" style="border-color:var(--blue);color:var(--blue);background:rgba(77,159,255,0.06)">🚀 Convertir</button>
+    </div>
+  </div>
+</div>
+

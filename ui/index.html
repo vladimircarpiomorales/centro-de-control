@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro de Control PRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="/static/vendor/marked.min.js"></script>
+<link rel="stylesheet" href="/static/css/panel.css?v={{ asset_v }}">
+</head>
+<body>
+<div class="shell">
+
+{% include 'partials/_topbar.html' %}
+{% include 'partials/_sidebar.html' %}
+  <!-- ══ MAIN ════════════════════════════════════════════════════ -->
+  <main class="main" id="main">
+
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">CPU</div>
+        <div class="stat-value" id="big-cpu">–%</div>
+        <div class="stat-bar"><div class="stat-fill" id="bar-cpu" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Memoria RAM</div>
+        <div class="stat-value" id="big-ram">–%</div>
+        <div class="stat-bar"><div class="stat-fill" id="bar-ram" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Disco /</div>
+        <div class="stat-value" id="big-disk">–%</div>
+        <div class="stat-bar"><div class="stat-fill" id="bar-disk" style="width:0%"></div></div>
+      </div>
+      <div class="stat-card" id="card-gpu" style="display:none">
+        <div class="stat-label">GPU</div>
+        <div class="stat-value" id="big-gpu">–%</div>
+        <div class="stat-bar"><div class="stat-fill" id="bar-gpu" style="width:0%;background:var(--blue)"></div></div>
+        <div style="font-size: 11px;color:var(--muted2)" id="gpu-extra"></div>
+      </div>
+    </div>
+
+{% include 'partials/tab_hoy.html' %}
+{% include 'partials/tab_servicios.html' %}
+{% include 'partials/tab_becas.html' %}
+{% include 'partials/tab_ofertas.html' %}
+{% include 'partials/tab_carrera.html' %}
+{% include 'partials/tab_ingles.html' %}
+{% include 'partials/tab_laboratorios.html' %}
+{% include 'partials/tab_mantenimiento.html' %}
+{% include 'partials/tab_estudio.html' %}
+{% include 'partials/tab_entrevistas.html' %}
+{% include 'partials/tab_redes.html' %}
+{% include 'partials/tab_agenda.html' %}
+{% include 'partials/tab_contactos.html' %}
+  </main>
+
+{% include 'partials/_logpanel.html' %}
+</div>
+
+</div>
+
+<script src="/static/js/core.js?v={{ asset_v }}"></script>
+<script src="/static/js/logs.js?v={{ asset_v }}"></script>
+<script src="/static/js/servicios.js?v={{ asset_v }}"></script>
+<script src="/static/js/becas.js?v={{ asset_v }}"></script>
+<script src="/static/js/ofertas.js?v={{ asset_v }}"></script>
+<script src="/static/js/carrera.js?v={{ asset_v }}"></script>
+<script src="/static/js/ingles.js?v={{ asset_v }}"></script>
+<script src="/static/js/laboratorios.js?v={{ asset_v }}"></script>
+<script src="/static/js/mantenimiento.js?v={{ asset_v }}"></script>
+<script src="/static/js/estudio.js?v={{ asset_v }}"></script>
+<script src="/static/js/entrevistas.js?v={{ asset_v }}"></script>
+<script src="/static/js/redes.js?v={{ asset_v }}"></script>
+<script src="/static/js/agenda.js?v={{ asset_v }}"></script>
+<script src="/static/js/contactos.js?v={{ asset_v }}"></script>
+<script src="/static/js/foco.js?v={{ asset_v }}"></script>
+<script src="/static/js/retos.js?v={{ asset_v }}"></script>
+<script src="/static/js/tarjetas.js?v={{ asset_v }}"></script>
+<script src="/static/js/resumen.js?v={{ asset_v }}"></script>
+<script src="/static/js/herramientas.js?v={{ asset_v }}"></script>
+<script src="/static/js/hoy.js?v={{ asset_v }}"></script>
+{% include 'partials/_modales.html' %}
+</body>
+</html>
